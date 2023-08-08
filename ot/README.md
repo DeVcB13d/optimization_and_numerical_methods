@@ -3,5 +3,5 @@
 * [ ] Travelling Salesman's problem
 * [ ] Sequencing problems
 * [ ] Integer Programming
-* [ ] Genetic Algorithm
-* [ ] Swarm Intelligence algorithm
+* [X] Genetic Algorithm
+* [X] Swarm Intelligence algorithm

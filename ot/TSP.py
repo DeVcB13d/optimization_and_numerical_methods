@@ -81,10 +81,13 @@ def is_solution_valid(solution):
     return len(visited_nodes) == len(solution)
 
 # Example usage
-distances = np.array([[0, 2, 9, 10],
-                     [1, 0, 6, 4],
-                     [15, 7, 0, 8],
-                     [6, 3, 12, 0]])
+# distances = np.array([[0, 2, 9, 10],
+#                      [1, 0, 6, 4],
+#                      [15, 7, 0, 8],
+#                      [6, 3, 12, 0]])
+distances =np.array( [[0, 10, 15, 20], [10, 0, 35, 25], [15, 35, 0, 30], [20, 25, 30, 0]] )
 
 optimal_order = solve_tsp(distances)
+cost = distances[optimal_order, range(distances.shape[1])].sum()
 print(optimal_order)
+print(cost)
