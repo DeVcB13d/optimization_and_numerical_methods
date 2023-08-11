@@ -55,22 +55,19 @@ def simpson_1_by_3(f,a,b,step):
     return I
 
 def main():
-    f = lambda x: 0.2 + 25*x - 200*(x**2) + 675*(x**3) - 900*(x**4) + 400*(x**5)
 
-    #f = lambda x: 2 / (1 + x**3)
+    # function to find integral
+    f = lambda x : x**2 + 2*x + 1
     a = 0
     b = 1
+    steps = 10
 
-    step = 2
+    print("Step size", steps)    
+    I1 = simpson_3_by_8(f,a,b,steps)
+    print("Simpson 3/8", I1)
 
-    for step in range(100,102):
-
-        print("Step size", step)    
-        I1 = simpson_3_by_8(f,a,b,step)
-        print("Simpson 3/8", I1)
-
-        I2 = simpson_1_by_3(f,a,b,step)
-        print("Simpson 1/3", I2)
+    # I2 = simpson_1_by_3(f,a,b,steps)
+    # print("Simpson 1/3", I2)
 
 if __name__ == "__main__":
     main()

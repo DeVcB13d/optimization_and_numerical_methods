@@ -9,6 +9,7 @@ Approximate steps
 
 '''
 import numpy as np
+from fractions import Fraction
 
 c = [12, 3, 4, 0, 0]
 A = [
@@ -18,6 +19,19 @@ A = [
 b = [-2, -3]
 
 
+'''
+Pivot step
+In this step, we will perform the pivot operation on the tableau 
+to get the next tableau that is closer to the optimal solution.
+
+The pivot operation is performed on the pivot element, which is the
+element in the pivot position. The pivot position is the position of
+the element with the smallest value in the last row of the tableau.
+
+input: tableau, pivot position
+output: new tableau
+
+'''
 def pivot_step(tableau, pivot_position):
     new_tableau = [[] for eq in tableau]
     
@@ -38,10 +52,11 @@ def to_tableau(c, A, b):
     z = c + [0]
     return xb + [z]
 
-
+# Checking if the tableau is optimal
 def is_basic(column):
     return sum(column) == 1 and len([c for c in column if c == 0]) == len(column) - 1
 
+# Finding the solution of a given tableau
 def get_solution(tableau):
     columns = np.array(tableau).T
     solutions = []
@@ -53,7 +68,21 @@ def get_solution(tableau):
         solutions.append(solution)
     return solutions
 
-# Find the rows with 
+
+'''
+Function to print the simplex table
+
+input: simplex table
+output: None
+'''
+def show_solutions(tableau):
+    solutions = get_solution(tableau)
+    var = ["x{0}".format(i+1) for i in range(len(tableau)-1)]
+    for s,v in zip(solutions,var):
+        print("{0} : {1}".format(v,Fraction(str(s)).limit_denominator(100)),end = '\n')
+    print("z : {0}".format(Fraction(str(tableau[-1][-1])).limit_denominator(100)))
+
+# Find the rows with negative values in the last column
 def can_be_improved_for_dual(tableau):
     rhs_entries = [row[-1] for row in tableau[:-1]]
     return any([entry < 0 for entry in rhs_entries])
@@ -74,21 +103,45 @@ def get_pivot_position_for_dual(tableau):
 
     return row, column
 
+
+# Function to print tableau
+def print_table(tableau):
+    n_var = len(tableau[0])
+    var = ["x{0}".format(i+1) for i in range(n_var-1)]
+    for j in var:
+        print(j,end = '\t')
+    print("c ",end = '\n\n')
+    
+    for k in tableau:
+        for eq in k:
+            print(Fraction(str(eq)).limit_denominator(100), end ='\t')
+        print('\n')
+
+
 def dual_simplex(c, A, b):
     # Conversion to simplex table
     tableau = to_tableau(c, A, b)
-
+    print("initial tableau: ")
+    print_table(tableau)
+    it = 0
     # While
     while can_be_improved_for_dual(tableau):
-        print(tableau)
+        print("\n\nIteration: ",it)
+        print_table(tableau)
+        it += 1
         pivot_position = get_pivot_position_for_dual(tableau)
         tableau = pivot_step(tableau, pivot_position)
 
+    show_solutions(tableau)
     return get_solution(tableau)
 
 soln  = dual_simplex(c, A, b)
 opt = 0
-for i,x in zip(soln,c):
-    print('{} x {} '.format(i,x), end = '+')
-    opt+=i*x
-print('\nDual ',opt)
+
+for i in range(len(c)):
+    opt += c[i]*soln[i]
+
+print("Optimal solution is: ",opt)
+
+
+

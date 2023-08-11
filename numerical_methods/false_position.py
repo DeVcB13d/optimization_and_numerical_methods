@@ -37,8 +37,8 @@ def false_postion(f,max_iters = 10):
 
 
 def main():
-    function = lambda x : x**3 - 12
-    false_postion(function)
+    function = lambda x : x**3 - 12*x - 20
+    false_postion(function,5)
 
 
 main()

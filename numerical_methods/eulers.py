@@ -25,7 +25,7 @@ def main():
     x0 = 0
     y0 = 1
     k = 0.1
-    step = 50
+    step = 3
     func = lambda x,y: (x**3) * math.exp(-2*x) - y 
     y = euler_method(x0,y0,k,step,func)
     print("y(2) = ",y)

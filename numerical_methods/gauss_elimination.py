@@ -31,8 +31,10 @@ def back_substitution(A,b):
     return x
 
 def main():
-    A = np.array([[1,1,1],[2,-1,1],[-1,2,2]])
-    b = np.array([-2,5,1])
+    A = eval(input("Enter the matrix: "))
+    b = eval(input("Enter the vector: "))
+    A = np.array(A)
+    b = np.array(b)
     A,b = gauss_elimination(A,b)
     x = back_substitution(A,b)
     for i in x:

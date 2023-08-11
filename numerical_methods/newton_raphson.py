@@ -16,16 +16,12 @@ def newton_raphson(function,derivative_function,coefficients =None,powers =None,
         iter+=1
     return x
 
-
 def main():
-    # coefficients = eval(input("Enter the coefficients: "))
-    # powers = eval(input("Enter the powers: "))
-    # interval = eval(input("Enter the interval: "))
-    #coefficients = [1,-1,2] 
-    #powers = [3,2,0]
-    #interval = [1,10]  
     function = lambda x : x**3 - 12
     derivative_function = lambda x : 3*x**2
+
+    print("input function is: ")
+
     res = newton_raphson(function,derivative_function)
     print("The root is: ",res)
 

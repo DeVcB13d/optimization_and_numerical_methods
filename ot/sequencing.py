@@ -80,12 +80,15 @@ def sequence_assign(seq_table):
 
     # Repeating until all elements are assigned
     while (np.sum(marked) / 2) != len(seq_table[0]):
+        print("Assignment : ", assign)
         # finding the minimum unmarked element in seq_table
         print("marked",marked)
         print("zeros",np.min(seq_table[marked == 0]))
         print(seq_table)
 
-        min_index = np.where(seq_table == (np.min(seq_table[marked == 0])))
+        min_value = np.min(seq_table[marked == 0])  # Find the minimum value where marked is 0
+        min_index = np.where((seq_table == min_value) & (marked == 0))  # Find indices where seq_table == min_value and marked == 0
+
         print("min_index", seq_table[marked == 0])
         print("min_index", min_index)
         # If only one minimum element
@@ -104,16 +107,21 @@ def sequence_assign(seq_table):
                 i_G -= 1
         # If more than one minimum element
         else:
+            print("min_index in else 2", min_index)
             # case 1: If minimum elements are in the same row
+            print(min_index[0][0],min_index[0][1])
             if min_index[0][0] == min_index[0][1]:
                 # Finding the minimum cost in second row
                 if seq_table[min_index[0][1],min_index[1][1]] < seq_table[min_index[0][0],min_index[1][0]]:
+                    print("at line 112 func")
                     assign[i_G] = min_index[1][1]
                     marked[0,min_index[1][1]] = 1
                     marked[1,min_index[1][1]] = 1
                     i_G -= 1
                 else:
+                    print("at line 118 func")
                     assign[i_H] = min_index[1][0]
+                    print("min index 01 ",min_index[1][0])
                     marked[0,min_index[1][0]] = 1
                     marked[1,min_index[1][0]] = 1
                     i_H += 1

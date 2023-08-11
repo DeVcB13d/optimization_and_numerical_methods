@@ -4,6 +4,8 @@ Performing integer programming
 
 from simplex import *
 
+
+
 import numpy as np
 
 z = np.array([5,7])

@@ -31,18 +31,16 @@ def trapezoidal(f,a,b,step):
     return I
 
 def main():
-    f = lambda x: 0.2 + 25*x - 200*(x**2) + 675*(x**3) - 900*(x**4) + 400*(x**5)
+    f = lambda x: 2 / (1 + x**3)
 
-    #f = lambda x: 2 / (1 + x**3)
     a = 0
     b = 0.8
 
-    step = 2
+    steps = 100
 
-    for step in range(1000,1010):
-   
-        I = trapezoidal(f,a,b,step)
-        print("steps {0}  Integral : {1}".format(step,I))
+    I = trapezoidal(f,a,b,steps)
+
+    print("Integral of f(x) from {0} to {1} is {2}".format(a,b,I))
 
 if __name__ == "__main__":
     main()

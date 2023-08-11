@@ -279,7 +279,8 @@ def Modi_method(sources,dest,costs):
         display_results(costs,assigned,U,V)
 
     print("Final assigned values : \n",assigned)
-        
+    
+    return assigned
 
     
 if __name__ == "__main__":
@@ -293,5 +294,6 @@ if __name__ == "__main__":
             [2,6,5,9],
             [8,3,3,2]
         ])
-
-    Modi_method(sources,dest,costs)
+    
+    assigned = Modi_method(sources,dest,costs)
+    print("Final cost: ",get_cost(costs,assigned)) 

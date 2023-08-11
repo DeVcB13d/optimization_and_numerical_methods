@@ -58,7 +58,7 @@ def plot_fitness(function,discrete_x,discrete_y,lim_range,generation):
 
 def update(sc,discrete_x,discrete_y):
     print("discrete x : ",discrete_x)   
-    plt.pause(0.01)
+    plt.pause(0.1)
     sc.set_offsets(np.c_[discrete_x,discrete_y])
     plt.draw()
 
@@ -183,10 +183,10 @@ def main():
     POPULATION_SIZE = 10
     CROSSOVER_RATE = 0.7
     MUTATION_RATE = 0.01
-    FITNESS_FN = lambda x : -1*(x-9)**2
-    LIM_RANGE = 127
+    FITNESS_FN = lambda x : -1*(x)**2 - 4
+    LIM_RANGE = 15
 
-    TOTAL_GENERATIONS = 50
+    TOTAL_GENERATIONS = 100
 
     max_value, x_value = genetic_optimize(FITNESS_FN,POPULATION_SIZE,CROSSOVER_RATE,MUTATION_RATE,LIM_RANGE,TOTAL_GENERATIONS)
     print("Max value by genetic = {0} for x = {1} ".format(max_value,x_value))
